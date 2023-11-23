@@ -81,10 +81,11 @@ public class Philosopher implements Runnable {
 				if (this.number != this.pickedFork) {
 					this.setRightFork(this.table.getForks()[i]);
 					System.out.println(this + " picked right " + this.table.getForks()[i]);
-					System.out.println(this.table.getForks()[i].isFree());
-				} else {
-					System.out.println((this.getNumber() + 1) + " skipped picking...");
-					System.out.println(this.rightFork);
+//					System.out.println(this.table.getForks()[i].isFree());
+				} 
+				else {
+//					System.out.println((this.getNumber() + 1) + " skipped picking..."+ this.getState().getMessage());
+//					System.out.println(this.rightFork);
 				}
 
 			}
@@ -121,7 +122,7 @@ public class Philosopher implements Runnable {
 					count.addCount();
 					if (this.number == count.getCount() - 1) {
 
-						System.out.println(this + " " + this.state.getMessage());
+						
 						pickRightFork();
 
 						if (this.rightFork != null) {
@@ -133,6 +134,10 @@ public class Philosopher implements Runnable {
 
 							}
 						}
+						else {
+							System.out.println((this.getNumber()+1) + " " + this.getState().getMessage());
+						}
+						
 						this.rightFork = null;
 						this.leftFork = null;
 						this.table.setCountP(this.table.getCountP() + 1);
