@@ -26,7 +26,7 @@ public class Main {
 //		tx.getStorage().editSymbol();
 //		tx.getStorage().displayKeys();
 		tx.convertWord();
-		tx.convertText("How you doing?");
+//		tx.convertText("How you doing?");
 	}
 
 }
