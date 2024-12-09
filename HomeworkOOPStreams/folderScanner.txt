@@ -1,0 +1,3 @@
+/Users/olegivanov/eclipse-workspace/HomeworkOOPStreams/Folder_1
+/Users/olegivanov/eclipse-workspace/HomeworkOOPStreams/Folder_2
+/Users/olegivanov/eclipse-workspace/HomeworkOOPStreams/Folder_3

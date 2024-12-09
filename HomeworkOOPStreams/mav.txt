@@ -1,0 +1,9 @@
+<dependency>
+<groupid>junit</groupid>
+<artifactid>junit</artifactid>
+‹version>4.4</version> <scope>test</scope>
+</dependency> <dependency>
+<groupid>org.powermock</groupid>
+<artifactid>powermock-reflect</artifactid>
+‹version>3.2</version>
+</dependency>
