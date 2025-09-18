@@ -1,8 +1,11 @@
 package com.gmail.oi;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Scanner;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
@@ -75,4 +78,18 @@ public class VowelsCounter {
 		}
 		return new Comp();
 	}
+	
+	public static int countRaws(File file) throws IOException{
+		StringBuilder sb = new StringBuilder();
+		String txt = "";
+		try(Scanner sc = new Scanner(file)){
+		while(sc.hasNextLine()){
+		sb.append(sc.nextLine());
+		}
+		}
+		
+		System.out.println(sb.toString());
+		 return sb.toString().split(System.lineSeparator()).length;
+
+		}
 }

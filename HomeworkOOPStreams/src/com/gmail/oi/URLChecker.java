@@ -1,7 +1,9 @@
 package com.gmail.oi;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.net.http.HttpClient;
@@ -22,6 +24,9 @@ public class URLChecker {
 	}
 
 	public List<String> checkURLs(File file) throws IOException {
+		Rocker rc = new Rocker();
+		rc.compareTo(rc);
+
 		Stream<String> stream = Files.lines(file.toPath());
 //		List<String> result = stream.filter((s)->s.)
 		return adds;
@@ -40,5 +45,31 @@ public class URLChecker {
 //		   System.out.println(response.body()); 
 		   return response.statusCode();
 	}
+	
+	public class AddApp{
+		public static void main(String [] args){
+			
+		}
+
+		static {
+
+		System.out.println("And this is 2nd class in this app");
+		File file = new File("Application");
+		try {
+			file.createNewFile();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		try(PrintWriter pw = new PrintWriter(file)){
+		pw.print("This is test app");
+		} catch (FileNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		}
+		}
+	
+
 
 }

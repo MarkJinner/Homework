@@ -1,5 +1,8 @@
 package com.gmail.oi;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -30,5 +33,13 @@ public class CatTest {
 		
 		
 	}
+	
+	public void save() throws IOException{
+		File file = new File("/Users/olegivanov/Desktop/App.txt");
+		file.createNewFile();
+		try(PrintWriter pw = new PrintWriter(file)){
+		pw.print("This is test file");
+		}
+		}
 
 }

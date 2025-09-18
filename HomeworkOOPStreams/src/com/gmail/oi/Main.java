@@ -2,21 +2,30 @@ package com.gmail.oi;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.net.URISyntaxException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.OptionalInt;
+import java.util.Scanner;
+import java.util.function.BinaryOperator;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
 import com.gmail.oi.Language.LEVEL;
 
 public class Main {
+	
+	public Date getDate(){
+		return new Date();
+		}
 
 	public static void main(String[] args) {
+		new Date();
 		// TODO Auto-generated method stub
 		try {
 			testApp();
@@ -31,9 +40,17 @@ public class Main {
 			e.printStackTrace();
 		}
 	}
+	static {
+		try {
+			save();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 
 	public static void testApp() throws IOException, URISyntaxException, InterruptedException {
-		List<Cat> cats = getCatsList();
+//		List<Cat> cats = getCatsList();
 
 //		getTheLongestName(cats).ifPresent((s) -> System.out.println(getTheLongestName(cats).get()));
 //		System.out.println(filterList());
@@ -43,7 +60,9 @@ public class Main {
 //		System.out.println(sortCats(cats));
 //		reduceTest();
 //		parseDoc(new File("/Users/olegivanov/eclipse-workspace/HomeworkOOPStreams/mav.txt"));
-		String test = "This is test line";
+		String test = "This is test line and lines and others";
+		File file = new File("/Users/olegivanov/Desktop/App.txt");
+		System.out.println(countRaws(file));
 //		System.out.println(test.startsWith("This"));
 //		System.out.println(test.endsWith("line"));
 //		filesToList(new File("/Users/olegivanov/Desktop/WORK"));
@@ -65,11 +84,70 @@ public class Main {
 //		int [] numbers = new int[] {1,2,4,5,7, -2};
 //		OptionalInt nmb = findMin(numbers);
 //		System.out.println(nmb.getAsInt());
+
+//		System.out.println(getLanguage("Easy"));
+
+//		countLetters(test);
+//		Integer [] []array  = new Integer[10000][10000];
+//		for(int i = 0; i< array.length;i++) {
+//			for(int j = 0; j< array.length;j++) {
+//				array[i][j] = 1+(int)(Math.random()*99);	
+//			}
+//			
+//		}
+		save();
+//		Rocker.getYou();
 		
-		System.out.println(getLanguage("Easy"));
-			
+//		ArrayCounter [] counters = new ArrayCounter[array.length];
+//		for(int i = 0; i< counters.length;i++) {
+//			counters[i] = new ArrayCounter(array[i], 0, array[i].length);
+//		}
+		
+//		System.out.println(Arrays.deepToString(array));
+//		Thread [] ts = new Thread[array.length];
+//		for(int i = 0; i< ts.length;i++) {
+//			ts[i] = new Thread(counters[i]);
+//			ts[i].start();
+//		}
+//		
+//		for(int i = 0; i< ts.length;i++) {
+//			ts[i].join();
+//		}
+//		int result = 0;
+//		for(int i = 0; i< ts.length;i++) {
+//			result = counters[i].getResult().intValue()+result;
+//		}
+		
+//		MultyArrayCounter mac = new MultyArrayCounter();	
+//		System.out.println(mac.countArray(array));
+//		System.out.println(mac.countArrayOrd(array));
+		
+		
+//		Stream<Integer[]> str = Stream.of(array).parallel();
+//		Function<Integer[], Integer> fun = (s)->{
+//			Stream<Integer> st = Arrays.stream(s);
+//			return st.reduce((a, b)->a+b).get();
+//		};
+		
+
+//		System.out.println(str.map(fun).reduce(0, (a,b)->a+b));
+//		str.reduce((a)->);
+//		str.forEach((k)-> System.out.println(k));
+		
+//		str.flatMap((s)->Stream.of(s).reduce((a,b)->a+b).reduce((c,d)->c+d));
+//		ArrayCounter ar = new ArrayCounter(array,0,3);
+//		Thread tr = new Thread(ar);
+//		tr.start();
+//		tr.join();
+		
+//		System.out.println((ar.countArray(array, 0, 1).get()));
+//		System.out.println(result);
 
 //		System.out.println(opt.get());
+//List<Integer> numbers = new ArrayList<>(List.of(1, 2, 3, 4, 5));
+//		System.out.println(getMultiplication(numbers).get());
+//		System.out.println(replaceMax(numbers));
+		
 	}
 
 	public static List<Cat> getCatsList() {
@@ -83,6 +161,28 @@ public class Main {
 		cats.add(null);
 		return cats;
 	}
+	
+	public static int countRaws(File file) throws IOException{
+		StringBuilder sb = new StringBuilder();
+		String txt = "";
+		try(Scanner sc = new Scanner(file)){
+		while(sc.hasNextLine()){
+		sb.append(sc.nextLine());
+		}
+		}
+		
+		System.out.println(sb.toString());
+		 return sb.toString().split(System.lineSeparator()).length;
+
+		}
+	
+	public static void save() throws IOException{
+		File file = new File("/Users/olegivanov/Desktop/App.txt");
+		file.createNewFile();
+		try(PrintWriter pw = new PrintWriter(file)){
+		pw.print("This is test file");
+		}
+		}
 
 	public static List<Cat> sortCatsList(List<Cat> cats) {
 		return cats.stream().filter((s) -> s != null).filter((s) -> s.getAge() > 1)
@@ -285,24 +385,44 @@ public class Main {
 		Optional<File[]> opt = fs.scanFolders(file);
 		return opt.isPresent() ? opt : Optional.empty();
 	}
-	
+
 	public static OptionalInt findMin(int[] list) {
-		
+
 		return Arrays.stream(list).min();
 	}
-	
-	public static <T> Optional<Language> getLanguage(T arg){
+
+	public static <T> Optional<Language> getLanguage(T arg) {
 		Language one = new Language("Java", LEVEL.Hard);
 		Language two = new Language("Fortran", LEVEL.Normal);
 		Language three = new Language("Basic", LEVEL.Easy);
 		Language four = new Language("C", LEVEL.Normal);
 		Language five = new Language("C++", LEVEL.Normal);
-		
+
 		List<Language> lngs = new ArrayList<>(List.of(one, two, three, four, five));
-		Predicate<Language> pr = (s)->s.getName().equals(arg) || s.getLvl().name().contains(arg.toString());
+		Predicate<Language> pr = (s) -> s.getName().equals(arg) || s.getLvl().name().contains(arg.toString());
 		Optional<Language> opt = lngs.stream().filter(pr).findAny();
 		return opt;
-		
+
+	}
+
+	public static void countLetters(String str) {
+
+		LettersCounter lc = new LettersCounter();
+
+		Optional<Integer> opt = lc.getLettersSum(str);
+		opt.ifPresentOrElse((s) -> System.out.println(opt.get()), () -> System.out.println("No words"));
+
+	}
+
+	public static Optional<Integer> getMultiplication(List<Integer> numbers) {
+		return numbers.stream().reduce((a, b) -> a * b);
+	}
+
+	public static Optional<Integer> replaceMax(List<Integer> numbers) {
+		Stream<Integer> str = numbers.stream();
+		BinaryOperator<Integer> biOp = (one, two) -> one > two ? one : two;
+
+		return str.reduce(biOp);
 	}
 
 }

@@ -7,6 +7,7 @@ public class Language {
 	public Language(String name, LEVEL lvl) {
 		this.name = name;
 		this.lvl = lvl;
+		
 	}
 
 	public Language() {

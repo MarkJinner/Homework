@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html>
+<meta charset= utf-8>
+<body>
+<title>Main page </title>
+  <header>
+  <style>
+  header {
+    background-color: lightblue; /* Задаем цвет шапки */
+    padding: 5px; /* Добавляем отступ для наглядности */
+    text-align: left; /* Выравнивание текста по центру */
+    color: black; /* Цвет текста для лучшей читаемости */
+    height:250px;
+    font-family: PT Sans;
+  	font-weight: normal;
+    
+  }.dropdown {
+  	font-family: PT Sans;
+  	font-weight: normal;
+    position: relative; /* Для позиционирования выпадающего контента */
+    display: inline-block;
+  }.dropdown-content {
+  	font-family: PT Sans;
+  	font-weight: normal;
+    display: none; /* Скрыть изначально */
+    position: absolute; /* Позиционировать относительно .dropdown */
+    background-color: #f9f9f9; 
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }.dropdown-content a{
+  	font-family: PT Sans;
+  	font-weight: normal;
+    color: white;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }.button{
+  	font-family: PT Sans;
+  	font-weight: normal;
+ 	color:white;
+    text-decoration: yes;
+  }.dropdown:hover .dropdown-content {
+    display: block; /* Показать при наведении */
+    background-color:transparent;
+    font-family: PT Sans;
+  	font-weight: normal;
+    color: white;
+    border:1px;
+  }.styled-button {
+                    /* Стилизация для внешнего вида */
+    display: inline-block; /* Чтобы можно было задавать отступы */
+    padding: 10px 20px;
+    font-family: PT Sans;
+  	font-weight: normal;
+    z-index:1;
+    background-color: orange; /* Цвет фона */
+    color: white; /* Цвет текста */
+    border: none; /* Убираем стандартную рамку ссылки */
+  	text-align: center;
+    text-decoration: none; /* Убираем подчеркивание */
+    font-size: 16px;
+    cursor: pointer; /* Курсор в виде руки */
+    border-radius: 5px; /* Скругленные углы */
+  }.styled-button:hover {
+  	font-family: PT Sans;
+  	font-weight: normal;
+  	z-index:1;
+    background-color: lightgrey; /* Цвет при наведении */
+  }.dropbtn {
+  	font-family: PT Sans;
+  	font-weight: normal;
+	color: white;
+	padding: 10px 20px;
+	min-width: 160px;
+	display: inline-block;
+	background-color: orange;
+	border:1px;
+	background-color:transparent;
+  }.styled-button2 {
+  	font-family: PT Sans;
+  	font-weight: normal;
+  	z-index:1;
+  	background-color: lightgrey;
+                    /* Стилизация для внешнего вида */
+    display: inline-block; /* Чтобы можно было задавать отступы */
+    padding: 5x 10px;
+    color: white; /* Цвет текста */
+    border: 2; /* Убираем стандартную рамку ссылки */
+  	text-align: center;
+    text-decoration: 2; /* Убираем подчеркивание */
+    font-size: 16px;
+    cursor: pointer; /* Курсор в виде руки */
+    border-radius: 0px; /* Скругленные углы */
+  }.styled-button2:hover {
+  	font-family: PT Sans;
+  	font-weight: normal;
+  	color: white;
+  	z-index:1;
+    background-color: orange; /* Цвет при наведении */
+  }.text-box {
+  	font-family: PT Sans;
+  	font-weight: normal;
+    width: 497px;
+    padding: 60px;
+    border: 0px solid darkgrey;
+    background-color: #f0f0f0;
+    margin-top: 7px;
+    margin-left: 1px;
+    margin-down: 1px;
+    text-align: justify;
+  }.container2 {
+  	font-family: PT Sans;
+  	font-weight: normal;
+    display: flex;
+    position: relative;
+    justify-content: space-between;
+    box-sizing: border-box;
+  }.container3 {
+  	font-family: PT Sans;
+  	font-weight: normal;
+   	display: flex;
+    justify-content: space-between;
+    box-sizing: border-box;
+  }.container4 {
+  	font-family: PT Sans;
+  	font-weight: normal;
+   	display: flex;
+    justify-content: space-between;
+    box-sizing: border-box; 
+  }.wrapper {
+  	font-family: PT Sans;
+  	font-weight: normal;
+    margin-top:5px;
+ 	display: flex;
+    flex-wrap : wrap;
+    justify-content: space-between;
+    border: 0px solid #bebebe;
+    text-align: center;
+    height: 500px;*/
+  }.text-box2 {
+  	font-family: PT Sans;
+  	font-weight: normal;
+  	font-size: 18px;
+	background-color: #f0f0f0;
+	justify-content: center;
+  	align-items: center;
+  	border: 0px solid darkgrey;
+  	margin-top: 5px;
+    margin-left: 1px;
+    margin-down: 1px;
+    text-align: justify;
+	box-sizing: border-box; 
+	padding:60px 
+  }.footer {
+  	font-family: PT Sans;
+  	font-weight: normal;
+    margin-top: 12px; /* Подвал прижимается к низу, занимая оставшееся пространство */
+    background-color: #f1f1f1;
+    padding: 20px;
+    text-align: center;
+    background-color: lightblue;
+  }.button-link{
+  	color: darkblue;
+  	cursor: pointer;
+  	text-decoration: none;
+  }.button-link:hover {
+  	color: orange;
+  	z-index:1;
+    background-color: transparent; /* Цвет при наведении */
+    text-decoration: underline;
+  }.email-button {
+  	display: inline-block;
+ /* padding: 0px 8px;*/
+ /* background-color: lightgrey;*/* Зеленый фон */
+ 	text-color: darkblue;
+  	color: orange; /* Белый текст */
+  	text-decoration: none; /* Убираем подчеркивание */
+  	border-radius: 5px; /* Скругленные углы */
+  	border: none; /* Убираем рамку */
+  	cursor: pointer; /* Курсор-рука при наведении */
+  	font-size: 18px;
+  }.email-button:hover {
+ 	background-color: orange; /* Темнее при наведении */
+ 	padding: 0px 8px;
+ 	font-size: 18px;
+ 	color: white; /* Белый текст */
+ 	text-decoration: none;
+  }
+
+  </style><h1>
+
+
+    <div class = "c">
+        <a class="styled-button" href="address/main.html">MAIN</a>
+       <div class="dropdown">
+        <button class="styled-button">MENU</button>
+         <div class="dropdown-content">
+         
+          <a class="styled-button" href="address/punctuationMarksRemover.html">PunctuationMarksRemover</a>
+       <a class="styled-button" href="address/toUpperCaseTransformer.html">ToUpperCaseTransformer</a>
+      <a class="styled-button" href="address/toLowerCaseTransformer.html">ToLowerCaseTransformer</a>
+      
+    </div>
+  </div>
+ <a class="styled-button" href="address/about.html">ABOUT US</a>
+ <a href="mailto:oi243012@gmail.com?subject=Letter topic&body=Text of the letter" class="styled-button">WRITE US</></a>
+  		<button class="styled-button" style = "float: right;"; button onclick="window.location.href = 'address/default.html/';">RU</button></a>
+
+  </div>
+  </div>
+  </h1>
+  <h2>
+    <center> SITE TextTransformer UNDER CONSTRUCTION</h2>
+				<center>byOlegov
+
+  </header>
+  
+  <main>
+	 <div class = "container2">
+          <div class="text-box" style = "font-size: 18px;">
+            The project <a button class="button-link" href = 'address/main.html/';"><b>TextTransformer</b></button></a> is first project and we kindly ask you to take any meet mistakes and bugs with understanding, as the team is only looking for some expirience and provide this resource only basing on personal needs and ready to solve any problems by request.   
+        </div>
+               <div class="text-box" style = "right:0px;margin-left:10px;width: 500px;font-size: 18px;">
+            The resource offers several different services connected with text and text files transformations and edits and if you have any suggestions or requests about new services, which might be presented here, kindly  <a href="mailto:oi243012@gmail.com?subject=Letter topic&body=Text of the letter" class="email-button">
+  <b>write us on email</b>
+  
+</a>  
+        </div>
+        
+    <div>
+
+  </main>
+        </div>
+
+<div class="wrapper">
+  <div class="text-box2" style ="  width: 67%; height: 500px;order: 2;">
+    	So here is the text transformation services our resource is ready to offer you: 
+    	<p><a button class="button-link" href = 'address/toUpperCaseTransformer.html';"><b>ToUpperCaseTextTransformer</b></button></a>  - pretty simple service, which allows you to transform all your text into text in upper case
+    	<p><a button class="button-link" href = 'address/toLowerCaseTransformer.html';"><b>ToLowerCaseTextTransformer</b></button></a>  - same simple service, which help you to transform all input text into text in lower case 
+    	<p><a button class="button-link" href = 'address/punctuationMarksRemover.html';"><b>PunctuationMarksRemover</b></button></a>  - this simple function allows you to remove any punctuation marks from your text, keeping the text untouched
+  </div>
+  <div class="text-box2" style ="  width: 32%; height: 200px;order: 1;">
+  	First text
+  </div>
+  <div class="text-box2" style ="  width: 32%; height: 290px;order: 3;transform:translateY(-295px);">
+    Third text 
+  </div>
+</div>
+<div class = "footer">
+	This is footer @byOlegov
+</div>
+	 
+		
+
+</body>
+</html>	

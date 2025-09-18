@@ -15,6 +15,14 @@ public class Rocker implements Comparable<Rocker>{
 			this.songs.add(songs[i]);
 		}
 	}
+	
+	public Rocker() {
+		
+	}
+	
+	public static void getYou() {
+		
+	}
 
 	public String getName() {
 		return name;
