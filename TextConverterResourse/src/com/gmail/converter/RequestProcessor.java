@@ -7,32 +7,31 @@ import java.net.Socket;
 import java.util.Optional;
 
 import com.gmail.exceptions.PageNotFoundException;
-import com.gmail.logger.Logger;
 
-public class RequestProcessor implements Runnable{
+public class RequestProcessor implements Runnable {
 	private Socket sc;
 	private String address;
 	private ResponseCompiler compiler;
 	private PagesLibrary lib;
-	private Logger logger;
-	
+	private TextDecoder decoder = new TextDecoder();
+
 	public RequestProcessor(Socket sc, String addr) {
 		this.sc = sc;
 		this.address = addr;
-		compiler = new ResponseCompiler(address); 
-		lib = new PagesLibrary(address);
-		logger = new Logger();
-	}
-	
-	public RequestProcessor(Socket sc) {
-		this.sc = sc;
-		compiler = new ResponseCompiler(address); 
+		compiler = new ResponseCompiler(address);
 		lib = new PagesLibrary(address);
 
 	}
-	
+
+	public RequestProcessor(Socket sc) {
+		this.sc = sc;
+		compiler = new ResponseCompiler(address);
+		lib = new PagesLibrary(address);
+
+	}
+
 	public RequestProcessor() {
-		
+
 	}
 
 	public Socket getSc() {
@@ -51,14 +50,17 @@ public class RequestProcessor implements Runnable{
 		this.address = address;
 	}
 
-	
 	public void process(Socket sc) throws IOException, PageNotFoundException {
-		
-		try(BufferedInputStream bis = new BufferedInputStream(sc.getInputStream());PrintWriter pw = new PrintWriter(sc.getOutputStream())){		
-				pw.println(sendResponse(readRequest(bis)));
+
+		try (BufferedInputStream bis = new BufferedInputStream(sc.getInputStream());
+				PrintWriter pw = new PrintWriter(sc.getOutputStream())) {
+			String request = readRequest(bis);
+			if (request.length() > 0) {
+				pw.println(sendResponse(request));
+
+			}
 		}
 	}
-
 
 	private String readRequest(BufferedInputStream bis) throws IOException {
 
@@ -68,18 +70,19 @@ public class RequestProcessor implements Runnable{
 		for (int i = 0; i < buffer.length; i++) {
 			request = request + (char) buffer[i];
 		}
-		System.out.println("req first line = "+request.split(System.lineSeparator())[0]);
-		return request;
+//		System.out.println("Complete request = "+System.lineSeparator()+request);
+//		System.out.println("The end of the request");
+		return decoder.decode(request);
 	}
-	
+
 	private Page sendResponse(String request) throws PageNotFoundException, IOException {
 		Optional<Page> opt = compiler.compileResponse(request, address);
-		if(opt.isPresent()) {
+		if (opt.isPresent()) {
 			return opt.get();
-		}else {
+		} else {
 			return lib.defaultPage();
 		}
-			
+
 	}
 
 	@Override
@@ -93,8 +96,7 @@ public class RequestProcessor implements Runnable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
-	
-	
+
 }

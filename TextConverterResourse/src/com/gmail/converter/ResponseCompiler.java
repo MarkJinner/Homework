@@ -7,40 +7,52 @@ import java.util.Optional;
 import com.gmail.exceptions.PageNotFoundException;
 import com.gmail.logger.Logger;
 
+import clipboardwrapper.ClipboardWrapper;
+
 public class ResponseCompiler implements BrowserResponseCompiler {
 	private PagesLibrary lib;
 	private Logger logger;
 	private String address;
+	private RequestParser parser;
+	private AjaxRequestParser ajaxParser;
+	private PageLoader loader;
+	private ClipboardWrapper clipboardCopier;
+	private TextDecoder decoder = new TextDecoder();
 
 	public ResponseCompiler(String address) {
 		this.address = address;
 		logger = new Logger();
 		lib = new PagesLibrary(address);
+		parser = new RequestParser();
+		loader = new PageLoader(address);
+		clipboardCopier = new ClipboardWrapper();
+		ajaxParser = new AjaxRequestParser();
+
 	}
 
 	@Override
 	public Optional<Page> compileResponse(String request, String address) throws PageNotFoundException, IOException {
-		String req = request.split(System.lineSeparator())[0];
-		System.out.println(address);
-		String specified = "";
-		System.out.println("req = "+req);
-//		if (req.length() > 0) {
-			specified = req.substring(req.indexOf("GET /") + "GET /".length(), req.indexOf(" HTTP/1.1"));
-//		}
+		System.out.println("request = " + request);
+		request = decoder.decode(request);
+		String specified = parser.parseRequest(request);
+//		System.out.println("specified = "+specified);
+		
+		if (ajaxParser.ifAjax(request)) {
+			clipboardCopier.copyToClipBoard(ajaxParser.parseRequest(request));
+			logger.log("Ajax request: " + parser.parseRequestReferer(request));
+			logger.logRequestContent(ajaxParser.getJoinedConverterNameRequestContent(request));
+		} else {
+			logger.log(parser.parseRequestReferer(request));
+			logRequestContent(request);
+		}
+
+		
 
 		try {
-			if (specified.contains("main") || specified.equals("") || specified.equals(" ")) {
-				Optional<Page> requestedPage = Optional.ofNullable(lib.mainPage());
-				if (requestedPage.isPresent()) {
-					return requestedPage;
-				}
-			} else if (specified.contains("toUpperCaseTransformer")) {
-				System.out.println("yres!!!");
-				return new PageLoader().loadPage("underConstruction");
-			} else if (specified.contains("underConstruction")) {
-				return new PageLoader().loadPage("underConstruction");
+			if (specified.equals("") || specified.equals(" ")) {
+				return Optional.ofNullable(lib.mainPage());
 			} else {
-				return Optional.ofNullable(new PagesLibrary().defaultPage());
+				return lib.getPage(specified);
 			}
 
 		} catch (PageNotFoundException e) {
@@ -51,8 +63,15 @@ public class ResponseCompiler implements BrowserResponseCompiler {
 			e.printStackTrace();
 		}
 
-		return Optional.ofNullable(new PagesLibrary().defaultPage());
+		return Optional.ofNullable(lib.defaultPage());
 
+	}
+
+	private void logRequestContent(String req) throws IOException {
+
+		if(req.split(System.lineSeparator())[0].contains("POST")) {
+			logger.logRequestContent(parser.parseTextFromPOST(req));
+		}
 	}
 
 }

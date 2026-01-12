@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<meta charset="UTF-8">
+<body>
+ <div class = "text-box">
+ This is place for your text
+ <header>
+ <style>
+   header {
+    background-color: lightblue; /* Задаем цвет шапки */
+    padding: 5px; /* Добавляем отступ для наглядности */
+    text-align: left; /* Выравнивание текста по центру */
+    color: black; /* Цвет текста для лучшей читаемости */
+    height:250px;
+    font-family: PT Sans;
+  	font-weight: normal;
+    
+  }.text-box {
+  	font-family: PT Sans;
+  	font-weight: normal;
+    padding: 60px;
+    border: 0px solid darkgrey;
+    background-color: #f0f0f0;
+    margin-top: 7px;
+    margin-left: 1px;
+    margin-down: 5px;
+    text-align: justify;
+    height: 50px;
+  } #modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgba(0,0,0,0.5); /* Black w/ opacity */
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+} .modal-content {
+    background-color: #fefefe;
+    margin: auto; /* Auto margin centers it */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more specific */
+    max-width: 500px; /* Max width for larger screens */
+    position: relative;
+    border-radius: 8px;
+    }
+ </style>
+
+ </div>
+  <div class = "text-box">
+ This is place for your text
+
+ </div>
+  <div class = "text-box">
+ This is place for your text
+
+ </div>
+   <div class = "text-box">
+ This is place for your text
+
+ </div>
+   <div class = "text-box">
+ This is place for your text
+
+ </div>
+</header> 
+
+<form id="myForm" method="POST">
+    <input type="text" name="username" placeholder="Имя пользователя">
+    <button type="submit"id = "openModalBtn">Отправить</button>
+</form>
+<div id="response"></div>
+
+
+    <div id="modal">
+    <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h2>Modal Title</h2>
+        <p>This is the content of your modal window.</p>
+    </div>
+</div>
+
+
+
+</body>
+<script>
+const form = document.getElementById('myForm');
+const responseDiv = document.getElementById('response');
+
+	form.addEventListener('submit', async (event) => {
+    event.preventDefault(); // Предотвращаем стандартную отправку формы
+
+    const formData = new FormData(form); // Создаем объект FormData из формы
+
+    try {
+        const response = await fetch('http://localhost:8089/ajaxSample.html', { // Замените на ваш серверный URL
+            method: 'POST',
+            body: formData // Отправляем данные в формате FormData
+        });
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const result = await response; // Или response.json() если сервер возвращает JSON
+        responseDiv.innerHTML = ``; // Отображаем ответ
+		
+
+    } catch (error) {
+        responseDiv.innerHTML = `Ошибка: ${error}`; // Отображаем ошибку
+    }
+});
+
+
+const openModalBtn = document.getElementById('openModalBtn');
+const modal = document.getElementById('modal');
+const closeButton = document.querySelector('.close-button');
+
+openModalBtn.onclick = function() {
+    modal.style.display = 'flex'; // Use 'flex' to center content
+}
+
+closeButton.onclick = function() {
+    modal.style.display = 'none';
+}
+
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = 'none';
+    }
+}
+</script>
+
+</html>

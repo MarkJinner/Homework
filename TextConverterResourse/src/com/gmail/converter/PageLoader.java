@@ -12,7 +12,7 @@ import com.gmail.exceptions.PageNotFoundException;
 
 public class PageLoader {
 	private File file;
-	private String pathToFiles = "/Users/olegivanov/eclipse-workspace/TextConverterResourse/src/pages/";
+	private String pathToFiles = "/Users/olegivanov/Homework/TextConverterResourse/src/pages/";
 	private StringBuilder sb = new StringBuilder();
 	private PageTextReplacer replacer = new PageTextReplacer(sb);
 	private String address;
@@ -72,6 +72,7 @@ public class PageLoader {
 
 		sb.delete(0, sb.length());
 		String line = "";
+//		System.out.println("pgwName in loader"+pageName);
 
 		if (Arrays.stream(new File(pathToFiles).listFiles()).anyMatch(s -> s.getName().equals(pageName + ".html"))) {
 			try (BufferedReader br = new BufferedReader(new FileReader(new File(pathToFiles + pageName + ".html")))) {
@@ -88,6 +89,14 @@ public class PageLoader {
 		}
 		throw new PageNotFoundException("Requested page not found");
 	}
+	
+//	public Optional<Page> loadPageWithTransfromedText(String pageName, String tag, String newText, TextConverter converter){
+//		sb.delete(0, sb.length());
+//		String line = "";
+//		if(Arrays.stream(new File(this.pathToFiles).listFiles()).anyMatch(s->s.getName().equals(pageName+".html"))) {
+//			
+//		}
+//	}
 
 
 

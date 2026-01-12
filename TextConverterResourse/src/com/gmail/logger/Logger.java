@@ -23,6 +23,8 @@ public class Logger implements DateConverter, StackTraceConverter{
 		lg.log("test 2");
 		PageNotFoundException e = new PageNotFoundException();
 		lg.log(e);
+		System.out.println("!");
+		System.out.println("?");
 	}
 	
 	public Logger() {
@@ -46,6 +48,22 @@ public class Logger implements DateConverter, StackTraceConverter{
 		String sTrace = this.convert(e);
 		log(sTrace);
 	}
+	
+	public void logRequestContent(String request) throws IOException {
+		File file = new File("converted_Texts_storage.txt");
+		Path pathFile = Paths.get(file.getAbsolutePath());
+		
+		try(ByteChannel bc = Files.newByteChannel(pathFile, StandardOpenOption.CREATE, StandardOpenOption.WRITE,StandardOpenOption.APPEND)){
+			ByteBuffer bb = ByteBuffer.allocate(1024);
+			
+			bb.put((formatDate()+" "+request+System.lineSeparator()).getBytes());
+			bb.rewind();
+			bc.write(bb);		
+		}
+	}
+	
+
+	
 	
 	@Override
 	public String formatDate() {
